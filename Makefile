@@ -11,3 +11,6 @@ relog:
 
 clean:
 	rm -rf output
+
+run:
+	cd ./output && ./${RUN_NAME}

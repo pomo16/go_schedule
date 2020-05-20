@@ -2,7 +2,9 @@ package crons
 
 import (
 	"github.com/robfig/cron"
+	"github.com/sirupsen/logrus"
 	"go_schedule/consts"
+	"go_schedule/logger"
 	"go_schedule/process"
 	"time"
 )
@@ -12,14 +14,14 @@ import (
 //CronType在上述情况下不会被阻塞，新任务会在新的goroutine中执行，不影响尚未执行完的上一个任务。
 func InitCrons(cron int) {
 	switch cron {
-		case consts.CronType:
-			CronType()
-		case consts.TickType:
-			TickType()
-		case consts.LiteTickType:
-			LiteTickType()
-		default:
-			//todo: log error
+	case consts.CronType:
+		CronType()
+	case consts.TickType:
+		TickType()
+	case consts.LiteTickType:
+		LiteTickType()
+	default:
+		logrus.Errorf("cron type not exist!")
 	}
 }
 
@@ -58,7 +60,8 @@ func LiteTickType() {
 
 //taskFunc 要执行的任务函数
 func taskFunc() {
+	logger.InitLogger()
+	defer logger.CloseLogFile()
+
 	process.Schedule()
 }
-
-

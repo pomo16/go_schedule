@@ -9,5 +9,4 @@ func init() {
 	crons.InitCrons(consts.CronType)
 }
 
-func main() {
-}
+func main() {}

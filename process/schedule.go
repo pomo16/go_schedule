@@ -12,6 +12,7 @@ import (
 func Schedule() {
 	ctx := context.Background()
 	donec := make(chan struct{})
+	//所有读等待会在关闭时返回
 	defer close(donec)
 
 	taskc, errc := Load(ctx, donec)
